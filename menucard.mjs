@@ -1,4 +1,4 @@
-import sharp from 'sharp'
+const sharpLoader = () => import('sharp')
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 const FONT = 'DejaVu Sans, Arial, sans-serif'
@@ -83,5 +83,6 @@ ${tiles}
 <text x="${W / 2}" y="${H - 16}" text-anchor="middle" font-family="${FONT}" font-size="11" fill="#6B7599">Powered by ${esc(ownerName)}</text>
 </svg>`
 
+  const { default: sharp } = await sharpLoader()
   return sharp(Buffer.from(svg)).png().toBuffer()
 }
